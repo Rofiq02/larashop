@@ -6,7 +6,7 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <title>Larashop @yield("title")</title>
      <link rel="stylesheet" href="{{ asset('polished/polished.min.css') }}">
-     <link rel="stylsheet" href="{{ asset('polished/iconic/css/open-iconic-bootstrap.min.css') }}">
+     <link rel="stylesheet" href="{{ asset('polished/iconic/css/open-iconic-bootstrap.min.css') }}">
 
      <style>
         .grid-highlight{
@@ -27,7 +27,7 @@
         }
      </style>
      <script>
-        document.documentElement.className = document.documentElement.className.replace('no-js', 'js') + (document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1") ? ' svg' : ' no-svg'));
+        document.documentElement.className = document.documentElement.className.replace('no-js', 'js') + (document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1") ? ' svg' : ' no-svg');
      </script>
  </head>
  <body>
@@ -79,8 +79,9 @@
                         <li><a href="#"> Setting </a></li>
                         <li>
                             <form action="{{ route('logout') }}" method="POST">
-                            @csrf 
-                            <button class="dropdown-item" style="cursor: pointer">Sign Out</button>
+                                @csrf 
+                                <button class="dropdown-item" style="cursor: pointer">Sign Out</button>
+                            </form>
                         </li>
                     </div>
                 </ul>
