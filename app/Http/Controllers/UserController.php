@@ -12,9 +12,28 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::paginate(10);
+
+        $filterKeyword = $request->get('keyword');
+        $status = $request->get('status');
+
+        if($status){
+            $users = User::where('status', $status);
+        }else{
+            $users = User::paginate(10);
+        }
+
+        if($filterKeyword){
+            if($status){
+                $users = User::where('email', 'LIKE', "%$filterKeyword%")
+                        ->where('status', $status)
+                        ->paginate(10);
+            }else{
+                $users = User::where('email', 'LIKE', "%$filterKeyword%")->paginate(10);
+            }
+        }
 
         return view('users.index', compact('users'));
     }
@@ -66,7 +85,9 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+
+        return view('users.show', compact('user'));
     }
 
     /**
@@ -121,6 +142,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->with('status', 'Berhasil menghapus data');
     }
 }
